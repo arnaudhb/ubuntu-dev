@@ -27,4 +27,10 @@ RUN apt-get update && apt-get install -y \
 COPY add/etc/fonts/local.conf /etc/fonts/local.conf
 COPY add/root/* /root
 
+# Add an alias for launching Google Chrome
+RUN echo "alias chrome='google-chrome --user-data-dir > /dev/null 2>&1'" >> /root/.bash_aliases
+
+# Volumes
+VOLUME [ "/root/.config/google-chrome" ]
+
 CMD [ "bash" ]
