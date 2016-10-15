@@ -21,6 +21,7 @@ docker run -it --rm \
  --security-opt seccomp:$PWD/chrome.json \
  --group-add audio \
  --group-add video \
+ $DOCKER_VOLUMES \
  $USER_NAME/$IMG_NAME $*
 
 xhost - si:localuser:root
