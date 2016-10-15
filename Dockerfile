@@ -37,6 +37,9 @@ COPY add/etc/fonts/local.conf /etc/fonts/local.conf
 # Add files to root homedir
 COPY add/root/* /root
 
+# Add an alias for launching Google Chrome
+RUN echo "alias chrome='google-chrome --user-data-dir > /dev/null 2>&1'" >> /root/.bash_aliases
+
 # Install Java 8
 RUN  cd /opt \
 && wget -q --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
@@ -44,6 +47,9 @@ http://download.oracle.com/otn-pub/java/jdk/$ORACLE_JAVA_VERSION-$ORACLE_JAVA_PA
 && tar xzf jdk-*.tar.gz \
 && rm -f jdk-*.tar.gz \
 && ln -s /opt/jdk*_*/ jdk
+
+# Volumes
+VOLUME [ "/root/.config/google-chrome" ]
 
 # Entrypoint
 COPY docker-entrypoint.sh /
