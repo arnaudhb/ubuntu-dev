@@ -1,9 +1,12 @@
 FROM arnaudhb/ubuntu-dev-base
 
-# Get hangout plugin
+ENV ORACLE_JAVA_PATH b14
+ENV ORACLE_JAVA_VERSION 8u102
+
+# Get  Hangout plugin
 ADD https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb /src/google-talkplugin_current_amd64.deb
 
-# Install Chrome
+# Install packages for sound and display support
 RUN apt-get update && apt-get install -y \
  ca-certificates \
  gnupg \
@@ -15,16 +18,34 @@ RUN apt-get update && apt-get install -y \
  dbus-x11 \
  libcanberra-gtk3-0 libcanberra-gtk-module libcanberra-gtk3-module \
  --no-install-recommends \
+
+# Install Google Chrome
 && curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
 && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
 && apt-get update && apt-get install -y \
  google-chrome-stable \
  --no-install-recommends \
-&& dpkg -i '/src/google-talkplugin_current_amd64.deb' \
-&& rm -rf /var/lib/apt/lists/* \
-&& rm -rf /src/*.deb
 
+# Install Hangout plugin
+&& dpkg -i '/src/google-talkplugin_current_amd64.deb' \
+&& rm -rf /src/*.deb \
+&& rm -rf /var/lib/apt/lists/*
+
+# Add fonts
 COPY add/etc/fonts/local.conf /etc/fonts/local.conf
+
+# Add files to root homedir
 COPY add/root/* /root
 
-CMD [ "bash" ]
+# Install Java 8
+RUN  cd /opt \
+&& wget -q --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+http://download.oracle.com/otn-pub/java/jdk/$ORACLE_JAVA_VERSION-$ORACLE_JAVA_PATH/jdk-$ORACLE_JAVA_VERSION-linux-x64.tar.gz \
+&& tar xzf jdk-*.tar.gz \
+&& rm -f jdk-*.tar.gz \
+&& ln -s /opt/jdk*_*/ jdk
+
+# Entrypoint
+COPY docker-entrypoint.sh /
+RUN chmod u+x /docker-entrypoint.sh
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
