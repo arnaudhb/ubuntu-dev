@@ -40,7 +40,7 @@ RUN echo "alias firefox='firefox > /dev/null 2>&1'" >> /root/.bash_aliases
 
 
 # Volumes
-VOLUME [ "/root/.config/google-chrome" ]
+VOLUME [ "/root/.config/google-chrome", "/root/.firefox" ]
 
 
 # Entrypoint
