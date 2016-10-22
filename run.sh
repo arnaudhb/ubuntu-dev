@@ -3,7 +3,7 @@
 USER_NAME=arnaudhb
 USER_ID=`id -u`
 IMG_NAME=$(basename $(pwd))
-IMG_TAG=java
+IMG_TAG=build-automation
 
 xhost + si:localuser:root
 

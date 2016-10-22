@@ -1,19 +1,16 @@
-FROM arnaudhb/ubuntu-dev:browser
+FROM arnaudhb/ubuntu-dev:java
 
-ENV ORACLE_JAVA_PATH b14
-ENV ORACLE_JAVA_VERSION 8u102
-ENV JAVA_HOME /opt/jdk
-ENV PATH $PATH:$JAVA_HOME/bin
+ENV APACHE_MAVEN_VERSION 3.3.9
+ENV MAVEN_HOME /opt/maven
+ENV M2_HOME /opt/maven
+ENV PATH $PATH:$MAVEN_HOME/bin
 
-
-# Install Java 8
-RUN  cd /opt \
-&& wget -q --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-http://download.oracle.com/otn-pub/java/jdk/$ORACLE_JAVA_VERSION-$ORACLE_JAVA_PATH/jdk-$ORACLE_JAVA_VERSION-linux-x64.tar.gz \
-&& tar xzf jdk-*.tar.gz \
-&& rm -f jdk-*.tar.gz \
-&& ln -s /opt/jdk*_*/ jdk
-
+# Install Maven 3
+RUN cd /opt \
+&& wget -q http://apache.mindstudios.com/maven/maven-3/$APACHE_MAVEN_VERSION/binaries/apache-maven-$APACHE_MAVEN_VERSION-bin.tar.gz \
+&& tar xzf *maven*.tar.gz \
+&& rm -rf *maven*.tar.gz \
+&& ln -s /opt/*maven*/ maven
 
 # Entrypoint
 COPY docker-entrypoint.sh /
