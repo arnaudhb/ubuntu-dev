@@ -9,6 +9,7 @@ Inherit from [arnaudh/ubuntu-dev-base](https://github.com/arnaudhb/ubuntu-dev-ba
 Install all the needed packages to have a working development environment inside a docker container: 
   * Google Chrome browse
   * Mozilla Firefox
+  * Java 8u102
   * That's it, but other applications will follow :)
 
 The image will be tagged on the [Docker Store](https://store.docker.com/community/images/arnaudhb/ubuntu-dev) for each new application, so it will be easy to inherit from this tag and build your own image.
@@ -70,6 +71,18 @@ Inside the container, start Firefox with the command
  ```
 
 Feel free the use volumes to map user profiles dir (default in /root/.firefox) to be able to persist data over container starting.
+
+
+#### Java
+
+Inside the container, check Java installation with the command 
+
+ ```sh   
+    $> java -version
+    java version "1.8.0_102"
+    Java(TM) SE Runtime Environment (build 1.8.0_102-b14)
+    Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)
+ ```
 
 
 ### Troubleshooting

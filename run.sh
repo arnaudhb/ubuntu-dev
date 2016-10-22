@@ -3,7 +3,7 @@
 USER_NAME=arnaudhb
 USER_ID=`id -u`
 IMG_NAME=$(basename $(pwd))
-IMG_TAG=browser
+IMG_TAG=java
 
 xhost + si:localuser:root
 

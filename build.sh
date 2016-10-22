@@ -2,7 +2,7 @@
 
 USER_NAME=arnaudhb
 IMG_NAME=$(basename $(pwd))
-IMG_TAG=browser
+IMG_TAG=java
 
 # Make some cleanup
 docker rm -f `docker ps -a | grep "$USER_NAME/$IMG_NAME " | awk '{print $1}'` > /dev/null 2>&1
