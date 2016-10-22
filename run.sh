@@ -3,6 +3,7 @@
 USER_NAME=arnaudhb
 USER_ID=`id -u`
 IMG_NAME=$(basename $(pwd))
+IMG_TAG=browser
 
 xhost + si:localuser:root
 
@@ -21,7 +22,8 @@ docker run -it --rm \
  --security-opt seccomp:$PWD/chrome.json \
  --group-add audio \
  --group-add video \
- $USER_NAME/$IMG_NAME
+ $DOCKER_VOLUMES \
+ $USER_NAME/$IMG_NAME:$IMG_TAG $*
 
 xhost - si:localuser:root
 

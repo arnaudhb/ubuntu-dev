@@ -24,6 +24,12 @@ RUN apt-get update && apt-get install -y \
 && rm -rf /var/lib/apt/lists/* \
 && rm -rf /src/*.deb
 
+# Install Firefox
+RUN apt-get update && apt-get install -y \
+ firefox
+
+
+# Copy resources to container
 COPY add/etc/fonts/local.conf /etc/fonts/local.conf
 COPY add/root/* /root
 
@@ -31,6 +37,10 @@ COPY add/root/* /root
 RUN echo "alias chrome='google-chrome --user-data-dir > /dev/null 2>&1'" >> /root/.bash_aliases
 
 # Volumes
-VOLUME [ "/root/.config/google-chrome" ]
+VOLUME [ "/root/.config/google-chrome", "/root/.mozilla" ]
 
-CMD [ "bash" ]
+
+# Entrypoint
+COPY docker-entrypoint.sh /
+RUN chmod u+x /docker-entrypoint.sh
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
