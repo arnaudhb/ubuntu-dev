@@ -3,7 +3,11 @@ FROM arnaudhb/ubuntu-dev:java
 ENV APACHE_MAVEN_VERSION 3.3.9
 ENV MAVEN_HOME /opt/maven
 ENV M2_HOME /opt/maven
-ENV PATH $PATH:$MAVEN_HOME/bin
+
+ENV GRADLE_VERSION 3.1
+ENV GRADLE_HOME /opt/gradle
+
+ENV PATH $PATH:$MAVEN_HOME/bin:$GRADLE_HOME/bin
 
 # Install Maven 3
 RUN cd /opt \
@@ -11,6 +15,15 @@ RUN cd /opt \
 && tar xzf *maven*.tar.gz \
 && rm -rf *maven*.tar.gz \
 && ln -s /opt/*maven*/ maven
+
+
+# Install Gradle 3
+RUN cd /opt \
+&& wget -q https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip \
+&& unzip -qq *.zip \
+&& rm -rf *.zip \
+&& ln -s /opt/*gradle*/ gradle 
+
 
 # Entrypoint
 COPY docker-entrypoint.sh /

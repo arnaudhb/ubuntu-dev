@@ -86,6 +86,7 @@ Inside the container, check Java installation with the command
     Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)
  ```
 
+
 #### Automation build tool : Maven
 
 Inside the container, check Maven installation with the command
@@ -98,6 +99,26 @@ Inside the container, check Maven installation with the command
     Java home: /opt/jdk1.8.0_102/jre
     Default locale: en_US, platform encoding: ANSI_X3.4-1968
     OS name: "linux", version: "4.4.0-45-generic", arch: "amd64", family: "unix"   
+ ```
+
+
+#### Automation build tool : Gradle
+
+Inside the container, check Gradle installation with the command
+
+ ```sh   
+    $> gradle -version
+------------------------------------------------------------
+Gradle 3.1
+------------------------------------------------------------
+
+Build time:   2016-09-19 10:53:53 UTC
+Revision:     13f38ba699afd86d7cdc4ed8fd7dd3960c0b1f97
+
+Groovy:       2.4.7
+Ant:          Apache Ant(TM) version 1.9.6 compiled on June 29 2015
+JVM:          1.8.0_102 (Oracle Corporation 25.102-b14)
+OS:           Linux 4.4.0-45-generic amd64
  ```
 
 
