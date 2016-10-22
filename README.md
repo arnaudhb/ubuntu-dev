@@ -1,4 +1,4 @@
-## ubuntu-dev:build-automation
+## ubuntu-dev:ide
 
 
 ### Description
@@ -15,6 +15,7 @@ Install all the needed packages to have a working development environment inside
   * NodeJS 6.8.1
   * Grunt CLI
   * Gulp CLI
+  * Atom text editor
   * That's it, but other applications will follow :)
 
 The image will be tagged on the [Docker Store](https://store.docker.com/community/images/arnaudhb/ubuntu-dev) for each new application, so it will be easy to inherit from this tag and build your own image.
@@ -34,7 +35,7 @@ Run this image with the command :
 USER_NAME=arnaudhb
 USER_ID=`id -u`
 IMG_NAME=$(basename $(pwd))
-IMG_TAG=build-automation
+IMG_TAG=ide
 
 docker run -it --rm \
  -e DISPLAY=$DISPLAY \
