@@ -1,44 +1,20 @@
-FROM arnaudhb/ubuntu-dev:java
+FROM arnaudhb/ubuntu-dev:build-automation
 
-ENV APACHE_MAVEN_VERSION 3.3.9
-ENV MAVEN_HOME /opt/maven
-ENV M2_HOME /opt/maven
-
-ENV GRADLE_VERSION 3.1
-ENV GRADLE_HOME /opt/gradle
-
-ENV NODE_HOME /opt/node
-ENV NODE_VERSION 6.8.1
-
-ENV PATH $PATH:$MAVEN_HOME/bin:$GRADLE_HOME/bin:$NODE_HOME/bin
+ENV IDE_ATOM_VERSION v1.11.2
 
 
-# Install Maven 3
-RUN cd /opt \
-&& wget -q http://apache.mindstudios.com/maven/maven-3/$APACHE_MAVEN_VERSION/binaries/apache-maven-$APACHE_MAVEN_VERSION-bin.tar.gz \
-&& tar xzf *maven*.tar.gz \
-&& rm -rf *maven*.tar.gz \
-&& ln -s /opt/*maven*/ maven
+# Get Atom IDE
+ADD https://github.com/atom/atom/releases/download/$IDE_ATOM_VERSION/atom-amd64.deb /src
 
-# Install Gradle 3
-RUN cd /opt \
-&& wget -q https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip \
-&& unzip -qq *.zip \
-&& rm -rf *.zip \
-&& ln -s /opt/*gradle*/ gradle 
-
-# Install NodeJS
-RUN cd /opt \
-&& wget -q https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz \
-&& tar xf node*.tar.xz \
-&& rm -f node*.tar.xz \
-&& ln -s /opt/node*/ node
-
-# Install Grunt-CLI
-RUN npm install -g grunt-cli
-
-# Install Gulp
-RUN npm install -g gulp-cli
+# Install Atom IDE
+RUN apt-get update && apt-get install -y \
+ gconf2 \
+ libnotify4 \
+ python \
+ gvfs-bin \
+&& dpkg -i '/src/atom-amd64.deb' \
+&& rm -rf /src/*.deb \
+&& rm -rf /var/lib/apt/lists/*
 
 
 # Entrypoint

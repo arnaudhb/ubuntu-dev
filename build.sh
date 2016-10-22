@@ -2,7 +2,7 @@
 
 USER_NAME=arnaudhb
 IMG_NAME=$(basename $(pwd))
-IMG_TAG=build-automation
+IMG_TAG=ide
 
 # Make some cleanup
 docker rm -f `docker ps -a | grep "$USER_NAME/$IMG_NAME " | awk '{print $1}'` > /dev/null 2>&1
