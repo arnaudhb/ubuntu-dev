@@ -12,6 +12,9 @@ Install all the needed packages to have a working development environment inside
   * Java 8u102
   * Apache Maven 3.3.9
   * Gradle 3.1
+  * NodeJS 6.8.1
+  * Grunt CLI
+  * Gulp CLI
   * That's it, but other applications will follow :)
 
 The image will be tagged on the [Docker Store](https://store.docker.com/community/images/arnaudhb/ubuntu-dev) for each new application, so it will be easy to inherit from this tag and build your own image.
@@ -31,7 +34,7 @@ Run this image with the command :
 USER_NAME=arnaudhb
 USER_ID=`id -u`
 IMG_NAME=$(basename $(pwd))
-IMG_TAG=browser
+IMG_TAG=build-automation
 
 docker run -it --rm \
  -e DISPLAY=$DISPLAY \
@@ -81,9 +84,9 @@ Inside the container, check Java installation with the command
 
  ```sh   
     $> java -version
-    java version "1.8.0_102"
-    Java(TM) SE Runtime Environment (build 1.8.0_102-b14)
-    Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)
+java version "1.8.0_102"
+Java(TM) SE Runtime Environment (build 1.8.0_102-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)
  ```
 
 
@@ -93,12 +96,12 @@ Inside the container, check Maven installation with the command
 
  ```sh   
     $> mvn -version
-    Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T16:41:47+00:00)
-    Maven home: /opt/maven
-    Java version: 1.8.0_102, vendor: Oracle Corporation
-    Java home: /opt/jdk1.8.0_102/jre
-    Default locale: en_US, platform encoding: ANSI_X3.4-1968
-    OS name: "linux", version: "4.4.0-45-generic", arch: "amd64", family: "unix"   
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T16:41:47+00:00)
+Maven home: /opt/maven
+Java version: 1.8.0_102, vendor: Oracle Corporation
+Java home: /opt/jdk1.8.0_102/jre
+Default locale: en_US, platform encoding: ANSI_X3.4-1968
+OS name: "linux", version: "4.4.0-45-generic", arch: "amd64", family: "unix"   
  ```
 
 
@@ -119,6 +122,26 @@ Groovy:       2.4.7
 Ant:          Apache Ant(TM) version 1.9.6 compiled on June 29 2015
 JVM:          1.8.0_102 (Oracle Corporation 25.102-b14)
 OS:           Linux 4.4.0-45-generic amd64
+ ```
+
+
+#### Automation build tool : Grunt
+
+Inside the container, check Grunt installation with the command
+
+ ```sh   
+    $> grunt --version
+grunt-cli v1.2.0
+ ```
+
+
+#### Automation build tool : Gulp
+
+Inside the container, check Gulp installation with the command
+
+ ```sh   
+    $> gulp --version
+[xxx]CLI version 1.2.2
  ```
 
 
