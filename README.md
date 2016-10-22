@@ -7,7 +7,8 @@ Docker image for development.
 Inherit from [arnaudh/ubuntu-dev-base](https://github.com/arnaudhb/ubuntu-dev-base) image
 
 Install all the needed packages to have a working development environment inside a docker container: 
-  * Google Chrome browser
+  * Google Chrome browse
+  * Mozilla Firefox
   * That's it, but other applications will follow :)
 
 The image will be tagged on the [Docker Store](https://store.docker.com/community/images/arnaudhb/ubuntu-dev) for each new application, so it will be easy to inherit from this tag and build your own image.
@@ -15,7 +16,6 @@ The image will be tagged on the [Docker Store](https://store.docker.com/communit
 Having the sound to work can be painful, as you have different configurations on your host.
 The aim it to use resources of the host (with volumes) to stream audio on the soundcard.
 This image uses the pulseaudio server of the host to play sounds.
-
 
 It has been sucessfully tested with Ubuntu 16.04 host.
 
@@ -28,6 +28,7 @@ Run this image with the command :
 USER_NAME=arnaudhb
 USER_ID=`id -u`
 IMG_NAME=$(basename $(pwd))
+IMG_TAG=browser
 
 docker run -it --rm \
  -e DISPLAY=$DISPLAY \
@@ -44,19 +45,32 @@ docker run -it --rm \
  --security-opt seccomp:$PWD/chrome.json \
  --group-add audio \
  --group-add video \
- $USER_NAME/$IMG_NAME
+ $DOCKER_VOLUMES \
+ $USER_NAME/$IMG_NAME:$TAG
 
 ```
 
-#### Google chrome
+#### Google Chrome
 
-Insite the container, start Chrome with the command
+Inside the container, start Chrome with the command
 
  ```sh   
-    google-chrome --user-data-dir
+    $> chrome
  ```
 
 Feel free the use volumes to map user data dir (default in /root/.config/google-chrome) to be able to persist data over container starting.
+
+
+#### Mozilla Firefox 
+
+Inside the container, start Firefox with the command
+
+ ```sh   
+    $> firefox
+ ```
+
+Feel free the use volumes to map user profiles dir (default in /root/.firefox) to be able to persist data over container starting.
+
 
 ### Troubleshooting
 
@@ -90,6 +104,4 @@ https://github.com/sameersbn/docker-browser-box
 https://github.com/jessfraz/dockerfiles/tree/master/chrome/stable
 
 https://github.com/jessfraz/dockerfiles/issues/156
-
-
 
