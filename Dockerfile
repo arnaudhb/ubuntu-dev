@@ -1,6 +1,6 @@
 FROM arnaudhb/ubuntu-dev:build-automation
 
-ENV IDE_ATOM_VERSION v1.11.2
+ENV IDE_ATOM_VERSION v1.13.1
 
 
 # Get Atom IDE
