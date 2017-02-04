@@ -2,7 +2,6 @@ FROM arnaudhb/ubuntu-dev:build-automation
 
 ENV IDE_ATOM_VERSION v1.13.1
 
-
 # Get Atom IDE
 ADD https://github.com/atom/atom/releases/download/$IDE_ATOM_VERSION/atom-amd64.deb /src
 
@@ -21,7 +20,10 @@ RUN apt-get update && apt-get install -y \
 ADD http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/oomph/products/eclipse-inst-linux64.tar.gz /opt
 RUN cd /opt && tar xzf eclipse-inst-linux64.tar.gz
 
+# Cleanup
+RUN rm -f /opt/*.tar.gz
 
+# Exposed volume(s)
 VOLUME [ '/root/.atom' ]
 
 # Entrypoint
