@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
 && rm -rf /src/*.deb \
 && rm -rf /var/lib/apt/lists/*
 
+VOLUME [ '/root/.atom' ]
 
 # Entrypoint
 COPY docker-entrypoint.sh /
