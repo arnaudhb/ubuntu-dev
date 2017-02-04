@@ -16,6 +16,12 @@ RUN apt-get update && apt-get install -y \
 && rm -rf /src/*.deb \
 && rm -rf /var/lib/apt/lists/*
 
+
+# Get Eclipse installer
+ADD http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/oomph/products/eclipse-inst-linux64.tar.gz /opt
+RUN cd /opt && tar xzf eclipse-inst-linux64.tar.gz
+
+
 VOLUME [ '/root/.atom' ]
 
 # Entrypoint
