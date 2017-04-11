@@ -1,10 +1,10 @@
 FROM arnaudhb/ubuntu-dev:java
 
-ENV APACHE_MAVEN_VERSION 3.3.9
+ENV APACHE_MAVEN_VERSION 3.5.0
 ENV MAVEN_HOME /opt/maven
 ENV M2_HOME /opt/maven
 
-ENV GRADLE_VERSION 3.3
+ENV GRADLE_VERSION 3.5
 ENV GRADLE_HOME /opt/gradle
 
 ENV PATH $PATH:$MAVEN_HOME/bin:$GRADLE_HOME/bin
@@ -25,7 +25,7 @@ RUN cd /opt \
 && ln -s /opt/*gradle*/ gradle 
 
 # Install NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
 RUN apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
 
 # Install Grunt-CLI
