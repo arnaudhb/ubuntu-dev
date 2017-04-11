@@ -1,6 +1,6 @@
 FROM arnaudhb/ubuntu-dev:build-automation
 
-ENV IDE_ATOM_VERSION v1.13.1
+ENV IDE_ATOM_VERSION v1.15.0
 
 # Get Atom IDE
 ADD https://github.com/atom/atom/releases/download/$IDE_ATOM_VERSION/atom-amd64.deb /src
