@@ -20,6 +20,13 @@ RUN apt-get update && apt-get install -y \
 ADD http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/oomph/products/eclipse-inst-linux64.tar.gz /opt
 RUN cd /opt && tar xzf eclipse-inst-linux64.tar.gz
 
+# Post install
+RUN npm install -g swagger
+
+ADD https://dl.pstmn.io/download/latest/linux64 /opt
+RUN cd /opt && tar xzf linux64 && rm linux64
+RUN echo "alias postman='/opt/Postman/Postman > /dev/null 2>&1'" >> /root/.bash_aliases
+
 # Cleanup
 RUN rm -f /opt/*.tar.gz
 
